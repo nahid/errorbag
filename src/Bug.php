@@ -6,17 +6,17 @@ namespace Nahid\ErrorBag;
 
 use Exception;
 
-class Bug
+class Bug implements \ArrayAccess
 {
     /**
-     * @var Exception
+     * @var ?Exception
      */
-    protected Exception $exception;
+    protected ?Exception $exception = null;
 
     /**
-     * @var false|string
+     * @var ?string
      */
-    protected string $name;
+    protected ?string $name = null;
 
     /**
      * Bug constructor.
@@ -32,10 +32,10 @@ class Bug
     /**
      * set the error name
      *
-     * @param string $name
+     * @param ?string $name
      * @return $this
      */
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -45,10 +45,10 @@ class Bug
     /**
      * set the exception
      *
-     * @param Exception $exception
+     * @param ?Exception $exception
      * @return $this
      */
-    public function setException(Exception $exception): self
+    public function setException(?Exception $exception): self
     {
         $this->exception = $exception;
 
@@ -75,4 +75,34 @@ class Bug
         return $this->name;
     }
 
+    public function offsetExists($offset)
+    {
+        if ($offset !== 'name' && $offset !== 'exception') return false;
+
+        return true;
+    }
+
+    public function offsetGet($offset)
+    {
+
+        if ($offset === 'name') {
+            return $this->getName();
+        }
+
+        if ($offset === 'exception') {
+            return $this->getException();
+        }
+
+        return null;
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        throw new \Exception($offset . ' are immutable, you can not change it!');
+    }
+
+    public function offsetUnset($offset)
+    {
+        throw new \Exception($offset . ' are immutable, you can not change it!');
+    }
 }
