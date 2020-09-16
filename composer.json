@@ -1,0 +1,24 @@
+{
+    "name": "nahid/errorbag",
+    "description": "A PHP package for contains and manage all errors and exceptions",
+    "type": "library",
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "5.2.x-dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nahid Bin Azhar",
+            "email": "nahid.dns@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nahid\\ErrorBag\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
