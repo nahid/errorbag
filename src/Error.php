@@ -7,7 +7,7 @@ namespace Nahid\ErrorBag;
 
 use Exception;
 
-class Error
+class Error implements \Iterator
 {
     /**
      * @var array[Bug]
@@ -161,5 +161,30 @@ class Error
         }
 
         return $return;
+    }
+
+    public function current()
+    {
+        return current($this->bag);
+    }
+
+    public function next()
+    {
+        return next($this->bag);
+    }
+
+    public function key()
+    {
+        return key($this->bag);
+    }
+
+    public function valid()
+    {
+        return key($this->bag) !== null;
+    }
+
+    public function rewind()
+    {
+        return reset($this->bag);
     }
 }
