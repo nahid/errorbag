@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Nahid\ErrorBag;
 
 
+use Exception;
+
 class Error
 {
     /**
@@ -12,9 +14,17 @@ class Error
      */
     protected array $bag = [];
 
+    /**
+     * @var bool
+     */
     protected bool $occurred = false;
 
-    public function push(\Exception $exception): void
+    /**
+     * push an error in error bag
+     *
+     * @param Exception $exception
+     */
+    public function push(Exception $exception): void
     {
         $this->setBag(new Bug($exception));
 
@@ -23,7 +33,13 @@ class Error
         }
     }
 
-    public function pushAs(string $name, \Exception $exception): void
+    /**
+     * push an error with name in error bag
+     *
+     * @param string $name
+     * @param Exception $exception
+     */
+    public function pushAs(string $name, Exception $exception): void
     {
         $this->setBag((new Bug($exception))->setName($name));
 
@@ -32,16 +48,31 @@ class Error
         }
     }
 
+    /**
+     * set bug to the bag
+     *
+     * @param Bug $bug
+     */
     protected function setBag(Bug $bug): void
     {
         array_push($this->bag, $bug);
     }
 
+    /**
+     * check has already error occurred
+     *
+     * @return bool
+     */
     public function has(): bool
     {
         return $this->occurred;
     }
 
+    /**
+     * get the first occurred error
+     *
+     * @return Bug|null
+     */
     public function first(): ?Bug
     {
         if ($this->has()) {
@@ -51,6 +82,11 @@ class Error
         return null;
     }
 
+    /**
+     * get the last occurred error
+     *
+     * @return Bug|null
+     */
     public function last(): ?Bug
     {
         if ($this->has()) {
@@ -60,11 +96,21 @@ class Error
         return null;
     }
 
+    /**
+     * get all errors
+     *
+     * @return array
+     */
     public function all(): array
     {
         return $this->bag;
     }
 
+    /**
+     * get errors as array
+     *
+     * @return array
+     */
     public function toArray(): array
     {
         $errors = [];
@@ -82,6 +128,12 @@ class Error
         return $errors;
     }
 
+    /**
+     * get errors by name
+     *
+     * @param string $name
+     * @return array|null
+     */
     public function get(string $name): ?array
     {
         $errors = array_filter($this->bag, function ($error) use($name) {
@@ -91,6 +143,12 @@ class Error
         return count($errors) ? $errors : null;
     }
 
+    /**
+     * check has errors by name
+     *
+     * @param string $name
+     * @return bool
+     */
     public function hasName(string $name)
     {
         $return = false;
