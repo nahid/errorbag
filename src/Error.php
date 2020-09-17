@@ -59,7 +59,7 @@ class Error implements \Iterator
      */
     protected function setBag(Bug $bug): void
     {
-        $this->bag[] = $bug;
+        array_push($this->bag, $bug);
     }
 
     /**
@@ -141,7 +141,7 @@ class Error implements \Iterator
     public function get(string $name): ?array
     {
         $errors = array_filter($this->bag, function ($error) use($name) {
-            return $name === $error->getName();
+            return $name == $error->getName();
         });
 
         return count($errors) ? $errors : null;

@@ -13,12 +13,12 @@ use Exception;
 class Bug implements \ArrayAccess
 {
     /**
-     * @var Exception|null ?Exception
+     * @var ?Exception
      */
     protected ?Exception $exception = null;
 
     /**
-     * @var string|null ?string
+     *  @var ?string
      */
     protected ?string $name = null;
 
@@ -36,7 +36,7 @@ class Bug implements \ArrayAccess
     /**
      * set the error name
      *
-     * @param string|null $name
+     * @param ?string $name
      * @return $this
      */
     public function setName(?string $name): self
@@ -49,7 +49,7 @@ class Bug implements \ArrayAccess
     /**
      * set the exception
      *
-     * @param Exception|null $exception
+     * @param ?Exception $exception
      * @return $this
      */
     public function setException(?Exception $exception): self
