@@ -6,6 +6,10 @@ namespace Nahid\ErrorBag;
 
 use Exception;
 
+/**
+ * Class Bug
+ * @package Nahid\ErrorBag
+ */
 class Bug implements \ArrayAccess
 {
     /**
@@ -75,7 +79,11 @@ class Bug implements \ArrayAccess
         return $this->name;
     }
 
-    public function offsetExists($offset)
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
+    public function offsetExists($offset): bool
     {
         if ($offset !== 'name' && $offset !== 'exception') return false;
 
