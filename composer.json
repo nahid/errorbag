@@ -14,10 +14,6 @@
         {
             "name": "Nahid Bin Azhar",
             "email": "nahid.dns@gmail.com"
-        },
-        {
-            "name": "Hashemi Rafsan",
-            "email": "rafsanhashemi@gmail.com"
         }
     ],
     "autoload": {
