@@ -6,15 +6,19 @@ namespace Nahid\ErrorBag;
 
 use Exception;
 
+/**
+ * Class Bug
+ * @package Nahid\ErrorBag
+ */
 class Bug implements \ArrayAccess
 {
     /**
-     * @var ?Exception
+     * @var Exception|null ?Exception
      */
     protected ?Exception $exception = null;
 
     /**
-     * @var ?string
+     * @var string|null ?string
      */
     protected ?string $name = null;
 
@@ -32,7 +36,7 @@ class Bug implements \ArrayAccess
     /**
      * set the error name
      *
-     * @param ?string $name
+     * @param string|null $name
      * @return $this
      */
     public function setName(?string $name): self
@@ -45,7 +49,7 @@ class Bug implements \ArrayAccess
     /**
      * set the exception
      *
-     * @param ?Exception $exception
+     * @param Exception|null $exception
      * @return $this
      */
     public function setException(?Exception $exception): self
@@ -75,7 +79,11 @@ class Bug implements \ArrayAccess
         return $this->name;
     }
 
-    public function offsetExists($offset)
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
+    public function offsetExists($offset): bool
     {
         if ($offset !== 'name' && $offset !== 'exception') return false;
 

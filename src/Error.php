@@ -7,6 +7,10 @@ namespace Nahid\ErrorBag;
 
 use Exception;
 
+/**
+ * Class Error
+ * @package Nahid\ErrorBag
+ */
 class Error implements \Iterator
 {
     /**
@@ -55,7 +59,7 @@ class Error implements \Iterator
      */
     protected function setBag(Bug $bug): void
     {
-        array_push($this->bag, $bug);
+        $this->bag[] = $bug;
     }
 
     /**
@@ -137,7 +141,7 @@ class Error implements \Iterator
     public function get(string $name): ?array
     {
         $errors = array_filter($this->bag, function ($error) use($name) {
-            return $name == $error->getName();
+            return $name === $error->getName();
         });
 
         return count($errors) ? $errors : null;
@@ -149,7 +153,7 @@ class Error implements \Iterator
      * @param string $name
      * @return bool
      */
-    public function hasName(string $name)
+    public function hasName(string $name): bool
     {
         $return = false;
 
@@ -178,7 +182,7 @@ class Error implements \Iterator
         return key($this->bag);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return key($this->bag) !== null;
     }
