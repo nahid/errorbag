@@ -18,7 +18,7 @@ class Bug implements \ArrayAccess
     protected ?Exception $exception = null;
 
     /**
-     *  @var ?string
+     * @var ?string
      */
     protected ?string $name = null;
 
